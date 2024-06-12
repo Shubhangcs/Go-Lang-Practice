@@ -17,8 +17,8 @@ func main() {
 			<head>
 				<title>i am back</title>
 			</head>
-			<body>
-				<a href="https://github.com/Shubhangcs">Click</a>
+			<body style="display: flex; justify-content: center; align-items: center; height:100vh;">
+				<button onclick="print()" style="width:5rem; height:3rem; background-color: red; color: white; border-radius: 2px;">Print</button>
 			</body>
 		</html>`))
 	})
