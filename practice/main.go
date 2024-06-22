@@ -1,16 +1,14 @@
 package main
 
-import (
-	"encoding/json"
-	"log"
-	"net/http"
-)
+import "fmt"
 
-func main() {
-	  log.Printf("Server is running in port 8000")
-	  http.HandleFunc("/login" , func (w http.ResponseWriter , r *http.Request){
-		json.NewEncoder(w).Encode("Hello")
-	  })
-	  log.Fatal(http.ListenAndServe(":8000" , nil))
+type Details struct{
+	Name string
+	Email string
+	Password string
 }
 
+func main(){
+	var kiran Details = Details{Name: "Kiran" , Email: "kiran@gmail.com" , Password: "kiran112"}
+	fmt.Println(kiran.Email)
+}
