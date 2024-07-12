@@ -1,14 +1,31 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sync"
+)
 
-type Details struct{
-	Name string
-	Email string
-	Password string
+func main() {
+	var wg = sync.WaitGroup{}
+	var mychan = make(chan int, 1)
+	wg.Add(1)
+	go Value(mychan, &wg)
+	mychan <- 10
+	defer wg.Wait()
 }
 
-func main(){
-	var kiran Details = Details{Name: "Kiran" , Email: "kiran@gmail.com" , Password: "kiran112"}
-	fmt.Println(kiran.Email)
+func Value(ch chan int, wg *sync.WaitGroup) {
+	fmt.Println("Hello", <-ch)
+	ch <- 20
+	wg.Add(1)
+	go Hello(ch, wg)
+	defer wg.Done()
+}
+
+func Hello(ch chan int, wg *sync.WaitGroup) {
+	_, err := fmt.Println("Hi", <-ch)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer wg.Done()
 }
